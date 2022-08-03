@@ -1,13 +1,13 @@
 /**
  * Modified by Arun, on 2 Aug 2022
- * role from https://www.bezkoder.com/node-js-express-login-mongodb
+ * User from https://www.bezkoder.com/node-js-express-login-mongodb
  * User data Mdoel
  */
 
-const mongoose = require("mongoose");
+/* const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+ */
 /* const userSchema = new Schema({
   username: {
     type: String,
@@ -20,7 +20,7 @@ const Schema = mongoose.Schema;
   timestamps: true,
 }); */
 
-const userSchema = new Schema(
+/* const userSchema = new Schema(
   {
     username: { type: String },
     email: { type: String },
@@ -31,8 +31,6 @@ const userSchema = new Schema(
         ref: "role",
       },
     ],
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
   },
   {
     timestamps: true,
@@ -40,4 +38,25 @@ const userSchema = new Schema(
 );
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
+module.exports = User;
+ */
+
+const mongoose = require("mongoose");
+
+const User = mongoose.model(
+  "User",
+  new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    roles: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role",
+      },
+    ],
+  })
+);
+
+//const User = mongoose.models.User || mongoose.model("User", userSchema);
 module.exports = User;
