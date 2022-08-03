@@ -2,6 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
 const cors = require("cors");
+const app = express();
+//this localhost is for the UserInterface
+var corsOptions = {
+  origin: "http://localhost:8081",
+};
+app.use(cors(corsOptions));
 //bezkoder-start
 const cookieSession = require("cookie-session");
 //bezkoder-start orgin start is not added below
@@ -12,13 +18,13 @@ const cookieSession = require("cookie-session");
 
 const exercisesRouter = require("./routes/exercises");
 const usersRouter = require("./routes/users");
+//added by arun on 2 aug 2022
 const rolesRouter = require("./routes/roles");
 const productsRouter = require("./routes/products");
 const storeorderRouter = require("./routes/storeorder");
 
 require("dotenv").config();
 
-const app = express();
 //this values is fetched from the port in the .env file
 //const port = process.env.PORT || 5000;
 //why the port value is not changing, thoug the value was put in the .env file
@@ -98,6 +104,14 @@ connection.once("open", () => {
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
+
+// routes
+
+/* require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
+ */
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

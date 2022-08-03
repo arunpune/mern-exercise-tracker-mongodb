@@ -4,14 +4,13 @@
  * role data Mdoel
  */
 
-const mongoose = require("mongoose");
+/* const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const roleSchema = new Schema(
   {
     role: { type: String },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
+    
   },
   {
     timestamps: true,
@@ -19,4 +18,16 @@ const roleSchema = new Schema(
 );
 
 const Role = mongoose.models.Role || mongoose.model("Role", roleSchema);
+module.exports = Role;
+ */
+
+const mongoose = require("mongoose");
+
+const Role = mongoose.model(
+  "Role",
+  new mongoose.Schema({
+    name: String,
+  })
+);
+
 module.exports = Role;
