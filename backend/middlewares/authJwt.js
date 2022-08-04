@@ -4,8 +4,9 @@ const config = require("../config/auth.config.js");
 //const db = require("../models");
 
 const db = require("../models");
-const User = db.User;
-const Role = db.Role;
+//Arun there was correction the db.user should be small caps
+const User = db.user;
+const Role = db.role;
 
 //const User = require("../models/user.model");
 //const Role = require("../models/role.model");
