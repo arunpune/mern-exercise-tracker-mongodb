@@ -1,20 +1,20 @@
-const User = require("../models/user.model");
+const Cityname = require("../models/cityname.model");
 const router = require("express").Router();
 
 router.route("/").get((req, res) => {
-  User.find()
+  Cityname.find()
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error" + err));
 });
 
 router.route("/add").post((req, res) => {
-  const username = req.body.username;
+  const cityname = req.body.cityname;
 
-  const newUser = new User({ username });
+  const newCityname = new Cityname({ cityname });
 
-  newUser
+  newCityname
     .save()
-    .then(() => res.json("User name added!"))
+    .then(() => res.json("Cityname added!"))
     .catch((err) => res.status(400).json("Error" + err));
 });
 

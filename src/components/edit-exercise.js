@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-
 const EditExercise = () => {
   const { id } = useParams();
   const [Exericse, setExericse] = useState({
@@ -14,41 +13,35 @@ const EditExercise = () => {
     date: new Date(),
   });
 
-  const [Users, setUsers] = useState([])
+  const [Users, setUsers] = useState([]);
 
   const onSubmit = () => {
-    axios
-      .post("http://localhost:5000/exercises/update/"+id, Exericse)
+    axios.post("http://localhost:5000/exercises/update/" + id, Exericse);
   };
 
-  useEffect( () => {
-
-    axios.get('http://localhost:5000/exercises/'+id)
-      .then(response => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/exercises/" + id)
+      .then((response) => {
         setExericse({
           username: response.data.username,
           description: response.data.description,
           duration: response.data.duration,
-          date: new Date(response.data.date)
-        })   
+          date: new Date(response.data.date),
+        });
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
 
-     axios
-      .get("http://localhost:5000/users")
-      .then(res => {
-        console.log(res)
-        res.data.map(user => {
-          setUsers(oldArray => [...oldArray, user.username])
-          return 0;
-        })
-      })
-
-      
+    axios.get("http://localhost:5000/users").then((res) => {
+      console.log(res);
+      res.data.map((user) => {
+        setUsers((oldArray) => [...oldArray, user.username]);
+        return 0;
+      });
+    });
   }, [id]);
-
 
   return (
     <div>

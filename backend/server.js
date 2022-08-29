@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 mongoose.set("debug", true);
 const cors = require("cors");
 
+const citynameRouter = require("./routes/cityname");
+const citystorenameRouter = require("./routes/citystorename");
 const exercisesRouter = require("./routes/exercises");
 const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
@@ -15,6 +17,9 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/cityname", citynameRouter);
+app.use("/citystorename", citystorenameRouter);
 app.use("/exercises", exercisesRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
