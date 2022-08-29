@@ -7,14 +7,23 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
+//how to take this data as an array?
 router.route("/add").post((req, res) => {
   const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  const roles = req.body.roles;
 
-  const newUser = new User({ username });
+  const newUser = new User({
+    username,
+    email,
+    password,
+    roles,
+  });
 
   newUser
     .save()
-    .then(() => res.json("User name added!"))
+    .then(() => res.json("User added!"))
     .catch((err) => res.status(400).json("Error" + err));
 });
 
